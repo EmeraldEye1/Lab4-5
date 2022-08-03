@@ -15,6 +15,9 @@ export default {
   getEvent(id) {
     return apiClient.get('/passenger/' + id)
   },
+  getEventAir(id) {
+    return apiClient.get('/airline/' + id)
+  },
   getEventsAir() {
     return apiClient.get('/airline')
   },

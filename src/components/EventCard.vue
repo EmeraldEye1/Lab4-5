@@ -1,10 +1,10 @@
 <template>
   <router-link
     class="event-link"
-    :to="{ name: 'EventDetails', params: { id: event._id, name: event.name } }"
+    :to="{ name: 'EventDetails', params: { id: event._id } }"
   >
     <div class="event-card">
-      <h4>{{ event.name }}</h4>
+      <h1>{{ event.name }}</h1>
     </div>
   </router-link>
 </template>
