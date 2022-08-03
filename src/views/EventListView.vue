@@ -1,33 +1,33 @@
 <template>
   <h1>Events For Good</h1>
-  <div class="events">
+  <template v-for="passenger in events">
     <EventCard
-      v-for="event in events"
-      :key="event.id"
+      v-for="event in passenger.data"
+      :key="event._id"
       :event="event"
     ></EventCard>
-    <div class="pagination">
-      <router-link
-        id="page-prev"
-        :to="{ name: 'EventList', query: { page: page - 1 } }"
-        rel="prev"
-        v-if="page != 1"
-      >
-        Prev Page</router-link
-      >
-      <router-link
-        id="page-next"
-        :to="{ name: 'EventList', query: { page: page + 1 } }"
-        rel="next"
-        v-if="hasNextPage"
-      >
-        Next Page</router-link
-      >
-    </div>
-    <router-link :to="{ name: 'EventList', query: { morepage: morepage + 1 } }">
-      Add data</router-link
+  </template>
+  <div class="pagination">
+    <router-link
+      id="page-prev"
+      :to="{ name: 'EventList', query: { page: page - 1 } }"
+      rel="prev"
+      v-if="page != 1"
+    >
+      Prev Page</router-link
+    >
+    <router-link
+      id="page-next"
+      :to="{ name: 'EventList', query: { page: page + 1 } }"
+      rel="next"
+      v-if="hasNextPage"
+    >
+      Next Page</router-link
     >
   </div>
+  <router-link :to="{ name: 'EventList', query: { morepage: morepage + 1 } }">
+    Add data</router-link
+  >
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(this.morepage, this.page)
+      EventService.getEventsPassenger()
         .then((response) => {
           this.events = response.data
           this.totalEvents = response.headers['x-total-count'] // <--- Store it
